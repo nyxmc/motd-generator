@@ -19,9 +19,10 @@ motd-enabled=true
 motds=[
 """
 for sentence in lines:
-    line2 = f"<yellow>{sentence.rstrip()}</yellow>"
-    obj = '    {' + os.linesep + '        "line1"="' + line1 + '"' + os.linesep + '        "line2"="' + line2 + '"' + os.linesep + '    },'
-    out += obj
+    if not sentence.startswith("#"):
+        line2 = f"<yellow>{sentence.rstrip()}</yellow>"
+        obj = '    {' + os.linesep + '        "line1"="' + line1 + '"' + os.linesep + '        "line2"="' + line2 + '"' + os.linesep + '    },'
+        out += obj
 out += os.linesep + "]"
 
 with open("main.conf", "w") as f:
